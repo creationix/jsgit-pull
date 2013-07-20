@@ -59,7 +59,7 @@ function demux(stream, channels) {
     var name = item[0];
     item = item[1];
     queues[name].push([null, item]);
-    check(item);
+    check(name);
   }
 
 }
