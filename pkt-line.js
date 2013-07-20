@@ -80,7 +80,7 @@ function deframer(emit) {
         break;
       }
       else {
-        emit(new Error("pkt-line decoder in invalid state"));
+        throw new Error("pkt-line decoder in invalid state");
       }
     }
   };
