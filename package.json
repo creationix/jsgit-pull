@@ -1,0 +1,26 @@
+{
+  "name": "git-pull",
+  "version": "0.0.0",
+  "description": "A simple-stream transform that implements the git pull protocol over a socket.",
+  "main": "git-pull.js",
+  "dependencies": {
+    "push-to-pull": "~0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/creationix/git-pull.git"
+  },
+  "keywords": [
+    "js-git",
+    "simple-stream"
+  ],
+  "author": "Tim Caswell <tim@creationix.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/creationix/git-pull/issues"
+  }
+}
