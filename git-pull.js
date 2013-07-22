@@ -13,10 +13,10 @@ function gitPull(socket, db, options) {
   var state;
   var streams = demux(deframer(socket), ["line", "pack", "error", "progress"]);
   var line = streams.line;
-  var pack = streams.pack;
   var write = writable(socket.abort);
   write.errorStream = streams.error;
   write.progress = streams.progress;
+  write.pack = streams.pack;
 
   send("git-upload-pack " + options.pathname + "\0host=" + options.hostname + "\0");
 
@@ -24,11 +24,6 @@ function gitPull(socket, db, options) {
 
   var caps;
   var wants = [];
-
-  each(pack, function (line) {
-    console.error("pack", inspect(line));
-  })(console.log);
-
 
   return write;
 
@@ -72,7 +67,7 @@ function gitPull(socket, db, options) {
 
   function onRead(err, item) {
     if (err) return write.error(err);
-    console.log(state.name, inspect(item, {colors:true}));
+    // console.log(state.name, inspect(item, {colors:true}));
     state(item, onNext);
   }
 
@@ -80,7 +75,6 @@ function gitPull(socket, db, options) {
     var index = item.indexOf("\0");
     if (index < 0) return next(new Error("Invalid ref line: " + JSON.stringify(item)));
     caps = parseCaps(item.substr(index + 1).trim());
-    console.log("CAPS", inspect(caps, {colors:true}));
     $refs(item.substr(0, index), next);
   }
 
