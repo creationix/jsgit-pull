@@ -102,7 +102,7 @@ function gitPull(socket, db, options) {
   }
   
   function $nak(item, next) {
-    if (item.trim() !== "NAK") return next(new Error("Expected NAK"));
+    if (item && item.trim() !== "NAK") return next(new Error("Expected NAK"));
     next(null, $dump);
   }
   
